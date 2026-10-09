@@ -13,15 +13,14 @@ class TopController < ApplicationController
    session.delete(:login_uid)
    redirect_to root_path
   end
+ 
   def login
-    uid = params[:uid]
-    pass = params[:pass]
+   user = User.find_by(uid: params[:uid])
 
-    if uid == "kindai" && pass == "sanriko"
-      session[:login_uid] = uid
-      redirect_to "/top/main"
-    else
-      render "error"
-    end
+  if user && BCrypt::Password.new(user.pass) == params[:pass]
+    session[:login_uid] = user.uid
+    redirect_to "/top/main"
+  else
+    render "error"
   end
 end
