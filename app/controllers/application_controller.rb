@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   def L4
-    cookies[:c] ||= 0  # ←遅延初期化というテク。ぜひ覚えて欲しい。
-    cookies[:c] = cookies[:c].to_i + 1
-    render plain: cookies[:c]
+    session[:c] ||= 0
+    session[:c] = session[:c].to_i + 1
+    render plain: session[:c]
   end
 end
