@@ -2,12 +2,12 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
-  # Changes to the importmap will invalidate the etag for HTML responses
+  # Changes to the importmap will invalidate the etag for HTML response
   stale_when_importmap_changes
 
   def L4
     session[:c] ||= 0
     session[:c] = session[:c].to_i + 1
-    render plain: session[:c]
+    render plain: session[:c] 
   end
 end
